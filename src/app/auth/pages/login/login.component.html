@@ -1,1 +1,34 @@
-<p>login works!</p>
+<div class="w-full">
+    <div class="w-full surface-300 min-h-screen sm:flex sm:justify-content-center sm:align-items-center">
+        <div class="min-w-min sm:col-4 border-2 surface-400 border-red-500 border-round-sm shadow-5
+            sm:flex sm:justify-content-center sm:align-items-center sm:flex-column
+        ">
+            <form [formGroup]="miFormulario" (ngSubmit)="login()">
+                <div class="p-inputtext-sm md:p-inputtext-lg">
+                    <div class="m-4">
+                        <span class="p-float-label">
+                            <input id="float-email"  
+                            formControlName="correo"
+                            type="text" pInputText > 
+                            <label for="float-email">Email</label>
+                        </span>
+                    </div>
+                    <div class="m-4">
+                        <span class="p-float-label">
+                            <input id="float-password"
+                            formControlName="password"
+                            class="p-inputtext-sm" type="password" pInputText > 
+                            <label for="float-password">Password</label>
+                        </span>
+                    </div>
+                    <div class="m-4 flex justify-content-center">
+                        <button pButton pRipple type="submit"
+                        label="Secondary" 
+                        class="p-button-rounded p-button-secondary">
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

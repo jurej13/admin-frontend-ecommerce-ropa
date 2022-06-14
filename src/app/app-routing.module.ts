@@ -7,6 +7,10 @@ const routes: Routes = [
     loadChildren:()=>import('./auth/auth.module').then(m=> m.AuthModule)
   },
   {
+    path:'dashboard',
+    loadChildren:()=>import('./private/private.module').then(m=>m.PrivateModule)
+  },
+  {
     path:'**',
     redirectTo:'auth'
   }
