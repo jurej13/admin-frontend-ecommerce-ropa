@@ -9,6 +9,7 @@ import { ListaProductosComponent } from './components/lista-productos/lista-prod
 import { ProductoService } from './services/producto.service';
 import { HttpClientModule } from '@angular/common/http';
 import { AgregarProductComponent } from './pages/agregar-product/agregar-product.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { AgregarProductComponent } from './pages/agregar-product/agregar-product
     CommonModule,
     PrivateRoutingModule,
     PrimengModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers:[ProductoService]
 })

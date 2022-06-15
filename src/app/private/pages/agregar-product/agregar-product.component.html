@@ -1,7 +1,7 @@
-<div class="col-12 w-full">
-    <div class="flex flex-wrap">
-        <div class="col-6">
-            <form autocomplete="off">
+<form autocomplete="off" [formGroup]="miFormulario" (ngSubmit)="agregar()">
+    <div class="col-12 w-full">
+        <div class="flex  flex-wrap">
+            <div class="col-6">
                 <div class="p-inputtext-sm md:p-inputtext-lg">
                     <div class="m-4">
                         <span class="p-float-label">
@@ -36,12 +36,19 @@
                         </span>
                     </div>
                     <div class="m-4">
-                        <span class="p-float-label">
-                            <input id="float-sexo"
-                            formControlName="sexo"
-                            class="p-inputtext-sm" type="text" pInputText > 
-                            <label for="float-sexo">Sexo</label>
-                        </span>
+                        <div class="field-radiobutton">
+                            <p-radioButton name="sexo"
+                             value="HOMBRE" 
+                             formControlName="sexo" 
+                             inputId="Hombre"></p-radioButton>
+                            <label for="Hombre">Hombre</label>
+                            <p-radioButton name="sexo"
+                             value="MUJER" 
+                             formControlName="sexo" 
+                             class="ml-2"
+                             inputId="Mujer"></p-radioButton>
+                            <label for="Mujer">Mujer</label>
+                        </div>
                     </div>
                     <div class="m-4">
                         <span class="p-float-label">
@@ -52,12 +59,13 @@
                         </span>
                     </div>
                     <div class="m-4">
-                        <span class="p-float-label">
-                            <input id="float-categoria"
-                            formControlName="categoria"
-                            class="p-inputtext-sm" type="text" pInputText > 
-                            <label for="float-categoria">Categoria</label>
-                        </span>
+                        <p-dropdown [options]="categorias"
+                         formControlName="categoria"
+                          placeholder="SelectCategory"
+                          (click)="redefinirCategoria()"
+                           [showClear]="true"
+                           ></p-dropdown>
+
                     </div>
                     <div class="m-4">
                         <span class="p-float-label">
@@ -66,20 +74,21 @@
                             class="p-inputtext-sm" type="text" pInputText > 
                             <label for="float-descripcion">Descripcion</label>
                         </span>
-                    </div>
-                    
+                    </div>   
                 </div>
-            </form>
-        </div>
-        <div class="col-6 flex justify-content-center">
-            add image
-        </div>
+            </div>
+            <div class="col-6 flex justify-content-center">
+                <div>
+                    <input type="file" (change)="saveFile($event)">
+                </div>
+            </div>
+        </div>  
     </div>
-    <div class="m-4 flex justify-content-center">
+    <div class="m-4 flex justify-content-center align-items-center">
         <button pButton pRipple type="submit"
         label="Secondary" 
         class="p-button-rounded p-button-secondary">
         </button>
     </div>
-</div>
+</form>
 
