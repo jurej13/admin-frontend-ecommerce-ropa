@@ -1,0 +1,36 @@
+<p-table *ngIf="products" [value]="products" responsiveLayout="scroll">
+    <ng-template pTemplate="caption">
+        <div class="flex align-items-center justify-content-between">
+            Products
+            <p-button icon="pi pi-heart" routerLink="/dashboard/agregar" label="Add"></p-button>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Name</th>
+            <th>Image</th>
+            <th>Price</th>
+            <th>Category</th>
+            <th>Stock</th>
+            <th></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-product>
+        <tr>
+            <td>{{product.nombre}}</td>
+            <td><img [src]="product.img" [alt]="product.nombre" width="100" class="shadow-4" /></td>
+            <td>{{product.precio | currency}}</td>
+            <td>{{product.categoria.nombre}}</td>
+            <td><span>{{product.stock}}</span></td>
+            <td>
+                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2"></button>
+                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"></button>
+            </td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+        <div class="flex align-items-center justify-content-between">
+            In total there are {{products ? products.length : 0 }} products.
+        </div>
+    </ng-template>
+</p-table>

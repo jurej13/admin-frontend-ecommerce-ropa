@@ -11,10 +11,10 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit(): void {
     this.items = [
-      {label: 'New', icon: 'pi pi-fw pi-plus'},
-      {label: 'Open', icon: 'pi pi-fw pi-download'},
+      {label: 'Listado', icon: 'pi pi-fw pi-plus',routerLink:'/dashboard/listado'},
+      {label: 'Agregar', icon: 'pi pi-fw pi-download',routerLink:'/dashboard/agregar'},
       {label: 'Undo', icon: 'pi pi-fw pi-refresh'}
-  ];
+    ];
   }
 
 }

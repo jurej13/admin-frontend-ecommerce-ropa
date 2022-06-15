@@ -13,7 +13,12 @@ export class ListaProductosComponent implements OnInit {
 
   ngOnInit(): void {
     this.productoService.getProducts()
-      .subscribe(resp=> this.products = resp)
+      .subscribe(resp=> this.products = resp.productos)
+  }
+
+
+  addProduct(){
+    console.log('Todo:/ hacer routerLink a Add.')
   }
 
 }

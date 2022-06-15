@@ -8,13 +8,15 @@ import { PrimengModule } from '../primeng/primeng.module';
 import { ListaProductosComponent } from './components/lista-productos/lista-productos.component';
 import { ProductoService } from './services/producto.service';
 import { HttpClientModule } from '@angular/common/http';
+import { AgregarProductComponent } from './pages/agregar-product/agregar-product.component';
 
 
 @NgModule({
   declarations: [
     DashboardComponent,
     SidebarComponent,
-    ListaProductosComponent
+    ListaProductosComponent,
+    AgregarProductComponent
   ],
   imports: [
     CommonModule,
