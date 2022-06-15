@@ -4,6 +4,8 @@ import { map, switchMap } from 'rxjs/operators';
 import { CategoriaEnums } from '../../enum/categorias.enum';
 import { ProductoSend } from '../../interface/productoSend.interface';
 import { ProductoService } from '../../services/producto.service';
+import Swal from 'sweetalert2'
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-agregar-product',
   templateUrl: './agregar-product.component.html',
@@ -20,6 +22,7 @@ export class AgregarProductComponent implements OnInit {
     categoria:['BUZOS',[Validators.required,Validators.minLength(4)]],
     descripcion:['sdaadasdasdads',[Validators.required,Validators.minLength(6)]],
   })
+  
   fileSaves !: any
   categorias : string[] = [CategoriaEnums.buzosNombre,
       CategoriaEnums.camperasNombre,CategoriaEnums.pantalonNombre,
@@ -29,7 +32,8 @@ export class AgregarProductComponent implements OnInit {
   product !: ProductoSend
   idProduct !: string
   constructor(private fb : FormBuilder,
-    private productoService : ProductoService
+    private productoService : ProductoService,
+    private router : Router
     ) { }
   ngOnInit(): void {
   }
@@ -52,19 +56,18 @@ export class AgregarProductComponent implements OnInit {
     }
   }
   agregar(){
-    this.product = {
-      nombre: this.miFormulario.get('nombre')?.value,
-      precio: this.miFormulario.get('precio')?.value,
-      talle: this.miFormulario.get('talle')?.value,
-      color: this.miFormulario.get('color')?.value,
-      sexo: this.miFormulario.get('sexo')?.value,
-      stock: this.miFormulario.get('stock')?.value,
-      categoria: this.definirCat,
-      descripcion: this.miFormulario.get('descripcion')?.value,
-    }
     if(!this.fileSaves){
-      throw Error('asdasd')
+      Swal.fire({
+        title: 'Error!',
+        text: 'Select a image.',
+        icon: 'error',
+        timer:1000,
+        confirmButtonText: 'Select a image.'
+      })
+      throw Error('Select a image')
     }else{
+      this.product = this.miFormulario.value
+      this.product.categoria = this.definirCat
       this.productoService.crearProducto(this.product)
       .pipe(
         map(product=> {
@@ -73,7 +76,16 @@ export class AgregarProductComponent implements OnInit {
           return {id:product._id,archivo : formData};
         }),
         switchMap(({id,archivo})=>this.productoService.uploadImg(id!,archivo))
-        ).subscribe( _ => console.log('Hacer pop up bonito'))
+        ).subscribe( _ =>{ 
+          Swal.fire({
+            title: 'Success!',
+            text: 'Product added with success',
+            icon: 'success',
+            timer:1000,
+            confirmButtonText: 'Redirecting'
+          })
+          setTimeout(()=>this.router.navigate(['/dashboard/listado']),1000)
+          })
       }
     }
     saveFile($event :any){

@@ -26,6 +26,7 @@ export class AuthService {
             title: 'Error!',
             text: 'Only admin user.',
             icon: 'error',
+            timer:1000,
             confirmButtonText: 'Intentar de nuevo'
           })
           throw new Error('Only admin user.')
