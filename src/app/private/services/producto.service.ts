@@ -34,12 +34,17 @@ export class ProductoService {
     const url : string = `${this.baseUrl}/productos/${idProducto}`
     const headers = new HttpHeaders()
       .set('x-token',this.token)
-      console.log(this.token)
     return this.http.delete<Producto[]>(url,{headers})
   }
 
   getProductoById (idProducto : string) : Observable<Producto>{
     const url : string = `${this.baseUrl}/productos/${idProducto}`
     return this.http.get<Producto>(url)
+  }
+  updateProductById(producto : Producto) {
+    const url : string = `${this.baseUrl}/productos/${producto._id}`
+    const headers = new HttpHeaders()
+      .set('x-token',this.token)
+    return this.http.put(url,producto,{headers})
   }
 }

@@ -118,4 +118,18 @@ export class AgregarProductComponent implements OnInit {
     saveFile($event :any){
       this.fileSaves = $event.target.files[0]
     }
+
+    // Parte de editar
+
+    editProduct(){
+      
+      this.productoToEdit = this.miFormulario.value
+      console.log('id de la categoria',this.definirCat)
+      this.productoToEdit.categoria._id= this.definirCat
+      console.log(this.productoToEdit)
+      this.productoService.updateProductById(this.productoToEdit)
+        .subscribe(resp => console.log(resp))
+    }
+
+
 }

@@ -7,5 +7,6 @@ export interface ProductoSend{
     color:string[],
     talle:number[],
     descripcion:string,
-    stock : number
+    stock : number,
+    img ?: string
 }

@@ -9,7 +9,7 @@
 </ng-template>
 
 
-<form autocomplete="off" [formGroup]="miFormulario" (ngSubmit)="agregar()">
+<form autocomplete="off" [formGroup]="miFormulario" >
     <div class="col-12 w-full">
         <div class="flex  flex-wrap">
             <div class="col-6">
@@ -103,8 +103,14 @@
         </div>  
     </div>
     <div class="m-4 flex justify-content-center align-items-center">
-        <button pButton pRipple type="submit"
+        <button pButton pRipple type="button" *ngIf="!productoToEdit"
         label="Agregar" 
+        (click)="agregar()"
+        class="p-button-rounded p-button-secondary">
+        </button>
+        <button pButton pRipple type="button" *ngIf="productoToEdit"
+        label="Editar" 
+        (click)="editProduct()"
         class="p-button-rounded p-button-secondary">
         </button>
     </div>
