@@ -1,5 +1,5 @@
 
-<h3 *ngIf="productoToEdit;else h3Agregar" class="text-center font-bold">
+<h3 *ngIf="productoForView;else h3Agregar" class="text-center font-bold">
     Editar Producto
 </h3>
 <ng-template #h3Agregar>
@@ -7,8 +7,6 @@
         Agregar Producto
     </h3>
 </ng-template>
-
-
 <form autocomplete="off" [formGroup]="miFormulario" >
     <div class="col-12 w-full">
         <div class="flex  flex-wrap">
@@ -103,13 +101,15 @@
         </div>  
     </div>
     <div class="m-4 flex justify-content-center align-items-center">
-        <button pButton pRipple type="button" 
+        <button pButton pRipple type="button"
+        *ngIf="!productoForView" 
         label="Agregar" 
         (click)="agregar()"
         class="p-button-rounded p-button-secondary">
         </button>
         <button pButton pRipple type="button" 
         label="Editar" 
+        *ngIf="productoForView"
         (click)="editProduct()"
         class="p-button-rounded p-button-secondary">
         </button>
