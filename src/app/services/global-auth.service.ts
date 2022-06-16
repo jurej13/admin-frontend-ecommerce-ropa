@@ -6,7 +6,6 @@ import { AuthResponse } from '../interface/authResponse.interface';
 })
 export class GlobalAuthService {
   private _usuario !: AuthResponse
-
   get usuario(){
     return {...this._usuario}
   }
@@ -14,5 +13,8 @@ export class GlobalAuthService {
   constructor() { }
   saveUser(usuario : AuthResponse){
     this._usuario=usuario
+  }
+  logout(){
+    localStorage.clear()
   }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { map, switchMap } from 'rxjs/operators';
+import { map, switchMap, tap } from 'rxjs/operators';
 import { CategoriaEnums } from '../../enum/categorias.enum';
 import { ProductoSend } from '../../interface/productoSend.interface';
 import { ProductoService } from '../../services/producto.service';
@@ -29,10 +29,10 @@ export class AgregarProductComponent implements OnInit {
       CategoriaEnums.camperasNombre,CategoriaEnums.pantalonNombre,
       CategoriaEnums.remerasNombre]
   definirCat !: string
-
+  productoForView !: Producto
   product !: ProductoSend
   idProduct !: string
-  productoToEdit !: Producto
+  productoToEdit !: ProductoSend
   constructor(private fb : FormBuilder,
     private productoService : ProductoService,
     private router : Router,
@@ -47,10 +47,10 @@ export class AgregarProductComponent implements OnInit {
     }
     this.route.params
       .pipe(
+        tap(({id}) => this.idProduct = id),
         switchMap(({id})=> this.productoService.getProductoById(id))
       )
       .subscribe((producto)=>{
-        this.productoToEdit = producto
         this.miFormulario=this.fb.group({
           nombre:producto.nombre,
           precio:producto.precio,
@@ -61,6 +61,9 @@ export class AgregarProductComponent implements OnInit {
           categoria:producto.categoria.nombre,
           descripcion:producto.descripcion,
         })
+        this.productoForView = producto
+
+        
       })
   }
   
@@ -122,13 +125,19 @@ export class AgregarProductComponent implements OnInit {
     // Parte de editar
 
     editProduct(){
-      
       this.productoToEdit = this.miFormulario.value
-      console.log('id de la categoria',this.definirCat)
-      this.productoToEdit.categoria._id= this.definirCat
-      console.log(this.productoToEdit)
-      this.productoService.updateProductById(this.productoToEdit)
-        .subscribe(resp => console.log(resp))
+      this.productoToEdit.categoria= this.definirCat
+      this.productoService.updateProductById(this.productoToEdit,this.idProduct)
+        .subscribe(_ =>{
+          Swal.fire({
+            title: 'Success!',
+            text: 'Product edit  success',
+            icon: 'success',
+            timer:1000,
+            confirmButtonText: 'Redirecting'
+          })
+          setTimeout(()=> this.router.navigate(['dashboard/listado']),1000)
+        })
     }
 
 

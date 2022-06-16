@@ -11,9 +11,9 @@ import { Producto } from '../interface/productos.interface';
 })
 export class ProductoService {
   baseUrl : string = environment.baseUrl
-  token !: string
+  token : string 
   constructor(private http : HttpClient,private authGlobal : GlobalAuthService) {
-    this.token = this.authGlobal.usuario.token
+    this.token = localStorage.getItem('token')!
    }
   getProducts() : Observable<Producto[]>{
     const url : string = `${this.baseUrl}/productos/todosproductos`
@@ -41,8 +41,8 @@ export class ProductoService {
     const url : string = `${this.baseUrl}/productos/${idProducto}`
     return this.http.get<Producto>(url)
   }
-  updateProductById(producto : Producto) {
-    const url : string = `${this.baseUrl}/productos/${producto._id}`
+  updateProductById(producto : ProductoSend,idProducto : string) {
+    const url : string = `${this.baseUrl}/productos/${idProducto}`
     const headers = new HttpHeaders()
       .set('x-token',this.token)
     return this.http.put(url,producto,{headers})

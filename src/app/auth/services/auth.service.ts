@@ -34,6 +34,7 @@ export class AuthService {
       })
     ).subscribe(resp=>{
       this.authGlobal.saveUser(resp)
+      localStorage.setItem('token',resp.token)
       Swal.fire({
         title: 'Success!',
         text: 'Login Success',

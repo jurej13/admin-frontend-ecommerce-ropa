@@ -88,7 +88,7 @@
                     </div>   
                 </div>
             </div>
-            <div class="col-6 flex justify-content-center" *ngIf="!productoToEdit ;else imgProducto">
+            <div class="col-6 flex justify-content-center" *ngIf="!productoForView ;else imgProducto">
                 <div>
                     <input type="file" (change)="saveFile($event)">
                 </div>
@@ -96,19 +96,19 @@
             <ng-template  #imgProducto>
                 <div class="col-6 flex justify-content-center">
                     <div>
-                        <img class="w-full" [src]="productoToEdit.img" [alt]="productoToEdit.nombre">
+                        <img class="w-full" [src]="productoForView.img" [alt]="productoForView.nombre">
                     </div>
                 </div>
             </ng-template>
         </div>  
     </div>
     <div class="m-4 flex justify-content-center align-items-center">
-        <button pButton pRipple type="button" *ngIf="!productoToEdit"
+        <button pButton pRipple type="button" 
         label="Agregar" 
         (click)="agregar()"
         class="p-button-rounded p-button-secondary">
         </button>
-        <button pButton pRipple type="button" *ngIf="productoToEdit"
+        <button pButton pRipple type="button" 
         label="Editar" 
         (click)="editProduct()"
         class="p-button-rounded p-button-secondary">

@@ -18,7 +18,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
     DashboardComponent,
     SidebarComponent,
     ListaProductosComponent,
-    AgregarProductComponent
+    AgregarProductComponent,
   ],
   imports: [
     CommonModule,
