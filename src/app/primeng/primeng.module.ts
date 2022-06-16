@@ -7,16 +7,20 @@ import {ToolbarModule} from 'primeng/toolbar';
 import {RadioButtonModule} from 'primeng/radiobutton';
 import {DropdownModule} from 'primeng/dropdown';
 import {FileUploadModule} from 'primeng/fileupload';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {ToastModule} from 'primeng/toast';
 @NgModule({
   exports:[
     ButtonModule,
+    ConfirmDialogModule,
     DropdownModule,
     InputTextModule,
+    FileUploadModule,
     MenuModule,
     TableModule,
     ToolbarModule,
     RadioButtonModule,
-    FileUploadModule
+    ToastModule,
   ]
 })
 export class PrimengModule { }

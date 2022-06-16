@@ -13,7 +13,7 @@ export class SidebarComponent implements OnInit {
     this.items = [
       {label: 'Listado', icon: 'pi pi-fw pi-plus',routerLink:'/dashboard/listado'},
       {label: 'Agregar', icon: 'pi pi-fw pi-download',routerLink:'/dashboard/agregar'},
-      {label: 'Undo', icon: 'pi pi-fw pi-refresh'}
+      {label: 'logout', icon: 'pi pi-fw pi-refresh',routerLink:'/auth'}
     ];
   }
 

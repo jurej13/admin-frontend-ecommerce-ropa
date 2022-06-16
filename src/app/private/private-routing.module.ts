@@ -10,7 +10,8 @@ const routes: Routes = [
     component:DashboardComponent,
     children:[
       {path:'listado',component:ListaProductosComponent},
-      {path:'agregar',component:AgregarProductComponent}
+      {path:'agregar',component:AgregarProductComponent},
+      {path:'editar/:id',component:AgregarProductComponent}
     ]
   },
   {

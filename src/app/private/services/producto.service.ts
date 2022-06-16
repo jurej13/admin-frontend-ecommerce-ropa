@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {  Observable } from 'rxjs';
 import { GlobalAuthService } from 'src/app/services/global-auth.service';
 import { ProductoSend } from '../interface/productoSend.interface';
+import { Producto } from '../interface/productos.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -13,11 +14,10 @@ export class ProductoService {
   token !: string
   constructor(private http : HttpClient,private authGlobal : GlobalAuthService) {
     this.token = this.authGlobal.usuario.token
-
    }
-  getProducts() : Observable<any>{
+  getProducts() : Observable<Producto[]>{
     const url : string = `${this.baseUrl}/productos/todosproductos`
-    return this.http.get<any>(url)
+    return this.http.get<Producto[]>(url)
   }
   crearProducto(producto : ProductoSend) : Observable<ProductoSend>{
     const url : string = `${this.baseUrl}/productos`
@@ -29,5 +29,17 @@ export class ProductoService {
     
     const url : string = `${this.baseUrl}/uploads/productos/${idProducto}`
     return this.http.put(url,archivo)
+  }
+  deleteProduct(idProducto: string) : Observable<Producto[]>{
+    const url : string = `${this.baseUrl}/productos/${idProducto}`
+    const headers = new HttpHeaders()
+      .set('x-token',this.token)
+      console.log(this.token)
+    return this.http.delete<Producto[]>(url,{headers})
+  }
+
+  getProductoById (idProducto : string) : Observable<Producto>{
+    const url : string = `${this.baseUrl}/productos/${idProducto}`
+    return this.http.get<Producto>(url)
   }
 }

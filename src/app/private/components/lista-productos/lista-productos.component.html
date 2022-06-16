@@ -23,8 +23,15 @@
             <td>{{product.categoria.nombre}}</td>
             <td><span>{{product.stock}}</span></td>
             <td>
-                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2"></button>
-                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"></button>
+                <button pButton pRipple icon="pi pi-pencil" 
+                class="p-button-rounded p-button-success mr-2"
+                [routerLink]="['/dashboard/editar',product._id]"
+                >
+                </button>
+                <button pButton pRipple icon="pi pi-trash"
+                 (click)="deleteProduct(product._id)"
+                  class="p-button-rounded p-button-warning">
+                </button>
             </td>
         </tr>
     </ng-template>
@@ -34,3 +41,5 @@
         </div>
     </ng-template>
 </p-table>
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+<p-toast position="bottom-center"></p-toast>

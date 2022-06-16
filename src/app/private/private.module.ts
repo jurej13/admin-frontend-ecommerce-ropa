@@ -10,6 +10,7 @@ import { ProductoService } from './services/producto.service';
 import { HttpClientModule } from '@angular/common/http';
 import { AgregarProductComponent } from './pages/agregar-product/agregar-product.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 
 @NgModule({
@@ -26,6 +27,6 @@ import { ReactiveFormsModule } from '@angular/forms';
     HttpClientModule,
     ReactiveFormsModule
   ],
-  providers:[ProductoService]
+  providers:[ProductoService,ConfirmationService,MessageService]
 })
 export class PrivateModule { }

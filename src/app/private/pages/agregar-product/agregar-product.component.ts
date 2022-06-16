@@ -5,7 +5,8 @@ import { CategoriaEnums } from '../../enum/categorias.enum';
 import { ProductoSend } from '../../interface/productoSend.interface';
 import { ProductoService } from '../../services/producto.service';
 import Swal from 'sweetalert2'
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Producto } from '../../interface/productos.interface';
 @Component({
   selector: 'app-agregar-product',
   templateUrl: './agregar-product.component.html',
@@ -13,14 +14,14 @@ import { Router } from '@angular/router';
 })
 export class AgregarProductComponent implements OnInit {  
   miFormulario : FormGroup = this.fb.group({
-    nombre:['buzaso',[Validators.required,Validators.minLength(6)]],
-    precio:[3500,[Validators.required,Validators.min(3000)]],
-    talle:[40,[Validators.required,Validators.min(32),Validators.max(42)]],
-    color:['azul',[Validators.required,Validators.minLength(2)]],
-    sexo:['HOMBRE',[Validators.required,Validators.minLength(6)]],
-    stock:[15,[Validators.required,Validators.min(3)]],
-    categoria:['BUZOS',[Validators.required,Validators.minLength(4)]],
-    descripcion:['sdaadasdasdads',[Validators.required,Validators.minLength(6)]],
+    nombre:['',[Validators.required,Validators.minLength(6)]],
+    precio:[,[Validators.required,Validators.min(3000)]],
+    talle:[,[Validators.required,Validators.min(32),Validators.max(42)]],
+    color:['',[Validators.required,Validators.minLength(2)]],
+    sexo:['',[Validators.required,Validators.minLength(6)]],
+    stock:[,[Validators.required,Validators.min(3)]],
+    categoria:['',[Validators.required,Validators.minLength(4)]],
+    descripcion:['',[Validators.required,Validators.minLength(6)]],
   })
   
   fileSaves !: any
@@ -31,12 +32,38 @@ export class AgregarProductComponent implements OnInit {
 
   product !: ProductoSend
   idProduct !: string
+  productoToEdit !: Producto
   constructor(private fb : FormBuilder,
     private productoService : ProductoService,
-    private router : Router
+    private router : Router,
+    private route : ActivatedRoute
     ) { }
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
+    
   }
+  ngOnInit(): void {
+    if(!this.router.url.includes('editar')){
+      return
+    }
+    this.route.params
+      .pipe(
+        switchMap(({id})=> this.productoService.getProductoById(id))
+      )
+      .subscribe((producto)=>{
+        this.productoToEdit = producto
+        this.miFormulario=this.fb.group({
+          nombre:producto.nombre,
+          precio:producto.precio,
+          talle:producto.talle,
+          color:producto.color,
+          sexo:producto.sexo,
+          stock:producto.stock,
+          categoria:producto.categoria.nombre,
+          descripcion:producto.descripcion,
+        })
+      })
+  }
+  
   redefinirCategoria(){
     switch (this.miFormulario.get('categoria')!.value) {
       case (CategoriaEnums.buzosNombre):
