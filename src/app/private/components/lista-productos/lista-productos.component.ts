@@ -28,7 +28,7 @@ export class ListaProductosComponent implements OnInit {
         this.productoService.deleteProduct(idProducto).pipe(
           switchMap(_=> this.productoService.getProducts())
         )
-          .subscribe((resp:any)=> {
+          .subscribe((resp: any)=> {
             this.products = resp.productos
             this.messageService.add({severity:'success', summary: 'Success', detail: 'Deleted Success'});
           })
