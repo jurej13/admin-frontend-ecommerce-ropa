@@ -7,10 +7,11 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { PrimengModule } from '../primeng/primeng.module';
 import { ListaProductosComponent } from './components/lista-productos/lista-productos.component';
 import { ProductoService } from './services/producto.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AgregarProductComponent } from './pages/agregar-product/agregar-product.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { SpinnerInterceptor } from './interceptors/spinner.interceptor';
 
 
 @NgModule({
@@ -27,6 +28,8 @@ import { ConfirmationService, MessageService } from 'primeng/api';
     HttpClientModule,
     ReactiveFormsModule
   ],
-  providers:[ProductoService,ConfirmationService,MessageService]
+  providers:[ProductoService,ConfirmationService,MessageService,
+  {provide:HTTP_INTERCEPTORS,useClass:SpinnerInterceptor,multi:true}
+  ]
 })
 export class PrivateModule { }

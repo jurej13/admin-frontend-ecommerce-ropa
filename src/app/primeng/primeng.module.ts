@@ -9,6 +9,7 @@ import {DropdownModule} from 'primeng/dropdown';
 import {FileUploadModule} from 'primeng/fileupload';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {ToastModule} from 'primeng/toast';
+import {ProgressSpinnerModule} from 'primeng/progressspinner';
 @NgModule({
   exports:[
     ButtonModule,
@@ -21,6 +22,7 @@ import {ToastModule} from 'primeng/toast';
     ToolbarModule,
     RadioButtonModule,
     ToastModule,
+    ProgressSpinnerModule
   ]
 })
 export class PrimengModule { }
