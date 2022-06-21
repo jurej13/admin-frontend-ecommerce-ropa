@@ -7,10 +7,12 @@ import { PrimengModule } from '../primeng/primeng.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from "@angular/common/http";
 import { AuthService } from './services/auth.service';
+import { ErrorLoginDirective } from './directives/error-login.directive';
 
 @NgModule({
   declarations: [
-    LoginComponent
+    LoginComponent,
+    ErrorLoginDirective
   ],
   imports: [
     CommonModule,

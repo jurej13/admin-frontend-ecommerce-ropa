@@ -3,14 +3,24 @@
         <div class="min-w-min sm:col-4 border-2 surface-400 border-red-500 border-round-sm shadow-5
             sm:flex sm:justify-content-center sm:align-items-center sm:flex-column
         ">
-            <form [formGroup]="miFormulario" (ngSubmit)="login()">
+            <form [formGroup]="miFormulario" (ngSubmit)="login()" autocomplete="off">
                 <div class="p-inputtext-sm md:p-inputtext-lg">
                     <div class="m-4">
                         <span class="p-float-label">
                             <input id="float-email"  
                             formControlName="correo"
-                            type="text" pInputText > 
+                            type="text" pInputText 
+                            > 
                             <label for="float-email">Email</label>
+                            <div>
+                                <span
+                                class="text-red-500 mt-2"
+                                error-msg
+                                mensaje="Formato de Email Incorrecto"
+                                [valido]="!tieneError('correo')"
+                                >
+                                </span>
+                            </div>
                         </span>
                     </div>
                     <div class="m-4">
@@ -19,6 +29,15 @@
                             formControlName="password"
                             class="p-inputtext-sm" type="password" pInputText > 
                             <label for="float-password">Password</label>
+                            <div>
+                                <span
+                                class="text-red-500 mt-2"
+                                error-msg
+                                mensaje="Formato de Password Incorrecto"
+                                [valido]="!tieneError('password')"
+                                >
+                                </span>
+                            </div>
                         </span>
                     </div>
                     <div class="m-4 flex justify-content-center">
