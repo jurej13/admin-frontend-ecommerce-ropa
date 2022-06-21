@@ -18,7 +18,7 @@ export class ListaProductosComponent implements OnInit {
 
   ngOnInit(): void {
     this.productoService.getProducts()
-      .subscribe((resp : any)=> this.products = resp.productos)
+      .subscribe((resp)=> this.products = resp)
   }
 
   deleteProduct(idProducto : string){
@@ -28,8 +28,8 @@ export class ListaProductosComponent implements OnInit {
         this.productoService.deleteProduct(idProducto).pipe(
           switchMap(_=> this.productoService.getProducts())
         )
-          .subscribe((resp: any)=> {
-            this.products = resp.productos
+          .subscribe((resp)=> {
+            this.products = resp
             this.messageService.add({severity:'success', summary: 'Success', detail: 'Deleted Success'});
           })
       }

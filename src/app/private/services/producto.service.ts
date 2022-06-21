@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {  Observable } from 'rxjs';
+import {  map, shareReplay } from 'rxjs/operators';
 import { GlobalAuthService } from 'src/app/services/global-auth.service';
 import { ProductoSend } from '../interface/productoSend.interface';
 import { Producto } from '../interface/productos.interface';
@@ -17,7 +18,10 @@ export class ProductoService {
    }
   getProducts() : Observable<Producto[]>{
     const url : string = `${this.baseUrl}/productos/todosproductos`
-    return this.http.get<Producto[]>(url)
+    return this.http.get<Producto[]>(url).pipe(
+      map((resp:any)=> resp.productos)
+      
+    )
   }
   crearProducto(producto : ProductoSend) : Observable<ProductoSend>{
     const url : string = `${this.baseUrl}/productos`
