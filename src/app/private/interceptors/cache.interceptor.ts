@@ -42,7 +42,8 @@ export class CacheInterceptor implements HttpInterceptor {
         const cachedResponse:
           | HttpResponse<any>
           | undefined = this.cacheService.get(req.url);
-  
+        // console.log('cached Response',cachedResponse)
+        // console.log('cacheService',this.cacheService.get(req.url))
         // return cached response
         if (cachedResponse) {
           // console.log(`Returning a cached response: ${cachedResponse.url}`);
@@ -62,6 +63,7 @@ export class CacheInterceptor implements HttpInterceptor {
       }
       else {
           // pass along non-cacheable requests 
+          this.cacheService.invalidateCache()
           return next.handle(req);
       }
     }
