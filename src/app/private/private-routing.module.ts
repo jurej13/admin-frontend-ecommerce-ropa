@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ListaProductosComponent } from './components/lista-productos/lista-productos.component';
 import { AgregarProductComponent } from './pages/agregar-product/agregar-product.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { ListaNoDisponiblesComponent } from './components/lista-no-disponibles/lista-no-disponibles.component';
 
 const routes: Routes = [
   {
@@ -12,6 +13,7 @@ const routes: Routes = [
       {path:'listado',component:ListaProductosComponent},
       {path:'agregar',component:AgregarProductComponent},
       {path:'editar/:id',component:AgregarProductComponent},
+      {path:'nodisponibles',component:ListaNoDisponiblesComponent},
       {path:'**',redirectTo:'listado'}
     ]
   },

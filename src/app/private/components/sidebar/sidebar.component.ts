@@ -14,6 +14,7 @@ export class SidebarComponent implements OnInit {
     this.items = [
       {label: 'Listado', icon: 'pi pi-fw pi-plus',routerLink:'/dashboard/listado'},
       {label: 'Agregar', icon: 'pi pi-fw pi-download',routerLink:'/dashboard/agregar'},
+      {label: 'No disponibles', icon: 'pi pi-fw pi-download',routerLink:'/dashboard/nodisponibles'},
       {label: 'logout', icon: 'pi pi-fw pi-refresh',routerLink:'/auth',command:()=>this.authGlobal.logout()}
     ];
   }

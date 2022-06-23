@@ -5,6 +5,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PrimengModule } from './primeng/primeng.module';
+import { GlobalAuthService } from './services/global-auth.service';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
 
 @NgModule({
@@ -18,7 +19,7 @@ import { SpinnerComponent } from './shared/spinner/spinner.component';
     PrimengModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [GlobalAuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

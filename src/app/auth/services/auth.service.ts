@@ -7,14 +7,17 @@ import { environment } from '../../../environments/environment';
 import Swal from 'sweetalert2'
 import { GlobalAuthService } from 'src/app/services/global-auth.service';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   baseUrl : string = environment.baseUrl
+  token !: Observable<string>
   constructor(private http : HttpClient,
       private authGlobal : GlobalAuthService,
-      private router : Router) { }
+      private router : Router
+      ) { }
 
 
   login (miFormulario : FormGroup) {
@@ -34,7 +37,7 @@ export class AuthService {
       })
     ).subscribe(resp=>{
       this.authGlobal.saveUser(resp)
-      localStorage.setItem('token',resp.token)
+      this.authGlobal.tokenData=resp.token
       Swal.fire({
         title: 'Success!',
         text: 'Login Success',

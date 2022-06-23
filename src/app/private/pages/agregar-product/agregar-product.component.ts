@@ -22,6 +22,7 @@ export class AgregarProductComponent implements OnInit {
     stock:[,[Validators.required,Validators.min(3)]],
     categoria:['',[Validators.required,Validators.minLength(4)]],
     descripcion:['',[Validators.required,Validators.minLength(6)]],
+    disponible:[false,[Validators.required],]
   })
   
   fileSaves !: any
@@ -60,10 +61,9 @@ export class AgregarProductComponent implements OnInit {
           stock:producto.stock,
           categoria:producto.categoria.nombre,
           descripcion:producto.descripcion,
+          disponible:producto.disponible
         })
-        this.productoForView = producto
-
-        
+        this.productoForView = producto        
       })
   }
   

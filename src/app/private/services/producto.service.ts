@@ -20,7 +20,12 @@ export class ProductoService {
     const url : string = `${this.baseUrl}/productos/todosproductos`
     return this.http.get<Producto[]>(url).pipe(
       map((resp:any)=> resp.productos)
-      
+    )
+  }
+  getProductsNoDisponibles(): Observable<Producto[]>{
+    const url : string = `${this.baseUrl}/productos/todosproductosnodisponibles`
+    return this.http.get<Producto[]>(url).pipe(
+      map((resp:any)=> resp.productos)
     )
   }
   crearProducto(producto : ProductoSend) : Observable<ProductoSend>{

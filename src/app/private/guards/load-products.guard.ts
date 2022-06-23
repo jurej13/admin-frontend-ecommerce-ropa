@@ -7,9 +7,11 @@ import { GlobalAuthService } from 'src/app/services/global-auth.service';
   providedIn: 'root'
 })
 export class LoadProductsGuard implements CanActivate, CanLoad {
-  token : string | null= ''
-  constructor(private router : Router){
-    this.token = localStorage.getItem('token')
+  token$ : Observable<string>
+  token !: string
+  constructor(private router : Router,authGlobal : GlobalAuthService){
+    this.token$ = authGlobal.token
+    this.token$.subscribe(resp => this.token = resp)
   }
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -24,6 +26,7 @@ export class LoadProductsGuard implements CanActivate, CanLoad {
   canLoad(
     route: Route,
     segments: UrlSegment[]): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+      console.log(this.token)
       if(this.token == ''){
         this.router.navigate(['auth'])
         return false;

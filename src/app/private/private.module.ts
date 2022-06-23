@@ -13,6 +13,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { SpinnerInterceptor } from './interceptors/spinner.interceptor';
 import { CacheInterceptor } from './interceptors/cache.interceptor';
+import { ListaNoDisponiblesComponent } from './components/lista-no-disponibles/lista-no-disponibles.component';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { CacheInterceptor } from './interceptors/cache.interceptor';
     SidebarComponent,
     ListaProductosComponent,
     AgregarProductComponent,
+    ListaNoDisponiblesComponent,
   ],
   imports: [
     CommonModule,
