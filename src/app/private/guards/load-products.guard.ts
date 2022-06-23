@@ -26,7 +26,6 @@ export class LoadProductsGuard implements CanActivate, CanLoad {
   canLoad(
     route: Route,
     segments: UrlSegment[]): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      console.log(this.token)
       if(this.token == ''){
         this.router.navigate(['auth'])
         return false;
