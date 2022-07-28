@@ -12,9 +12,9 @@ import { Producto } from '../interface/productos.interface';
 })
 export class ProductoService {
   baseUrl : string = environment.baseUrl
-  token : string 
+  token !: string 
   constructor(private http : HttpClient,private authGlobal : GlobalAuthService) {
-    this.token = localStorage.getItem('token')!
+    this.authGlobal.token.subscribe(token => this.token = token)
    }
   getProducts() : Observable<Producto[]>{
     const url : string = `${this.baseUrl}/productos/todosproductos`
